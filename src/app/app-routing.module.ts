@@ -22,6 +22,14 @@ const routes: Routes = [
     path: 'registrarse',
     loadChildren: () => import('./pages/registrarse/registrarse.module').then( m => m.RegistrarsePageModule)
   },
+  {
+    path: 'error404',
+    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
+  },
+  {
+    path: 'recuperar',
+    loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+  },
 
 ];
 
