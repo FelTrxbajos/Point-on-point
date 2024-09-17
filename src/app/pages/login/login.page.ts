@@ -25,10 +25,6 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-    if(this.correo==RegistrarsePageModule(this.correo) && this.contrasena==RegistrarsePageModule(this.contrasena)){
-      this.router.navigate(['/inicio']);
-    }else{
-      alert("CORREO O CONTRASEÑA INCORRECTOS!");
-    }
 
+  }
 }
