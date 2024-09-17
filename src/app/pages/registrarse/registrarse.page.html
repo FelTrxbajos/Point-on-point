@@ -8,7 +8,34 @@
 
   <ion-content>
     <ion-card>
-      f
+      <form [formGroup]="Usuario" (ngSubmit)="registro()">
+        <ion-input formControlName="nombre" type="text" label="Nombre"></ion-input>
+        <ion-input formControlName="apellido" type="text" label="Apellido"></ion-input>
+        <ion-input formControlName="rut" type="text" label="Rut"></ion-input>
+        <ion-select formControlName="genero" label="Género" cancelText="No responder">
+          <ion-select-option>Masculino</ion-select-option>
+          <ion-select-option>Femenino</ion-select-option>
+          <ion-select-option>Otro</ion-select-option>
+        </ion-select>
+        <ion-select formControlName="sede" label="Sede" cancelText="No responder">
+          <ion-select-option>Puente alto</ion-select-option>
+          <ion-select-option>Vespusio</ion-select-option>
+          <ion-select-option>San Joaquin</ion-select-option>
+        </ion-select>
+        <ion-select formControlName="carrera" label="Carrera" cancelText="No responder">
+          <ion-select-option>Ing.Informatica</ion-select-option>
+          <ion-select-option>Conectividad y redes</ion-select-option>
+          <ion-select-option>Analista programador</ion-select-option>
+        </ion-select>
+        <ion-input formControlName="fecha_nacimiento" type="date" label="Fecha nacimiento"></ion-input>
+        <ion-input formControlName="direccion" type="text" label="Dirección"></ion-input>
+        <ion-input formControlName="correo" type="text" label="Correo"></ion-input>
+        <ion-input formControlName="correo" type="text" label="Confirmar correo"></ion-input>
+        <ion-input formControlName="contrasena" type="text" label="Contraseña"></ion-input>
+        <ion-input formControlName="contrasena" type="text" label="Confirmar contraseña"></ion-input>
+        
+
+      </form>
     </ion-card>
   </ion-content>
 

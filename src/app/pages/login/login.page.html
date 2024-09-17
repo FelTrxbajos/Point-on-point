@@ -5,5 +5,18 @@
 </ion-header>
 
 <ion-content>
-  ñ
+  <ion-card>
+  <ion-card-header>Login de usuario</ion-card-header>
+    <ion-card-content>
+      <ion-input [(ngModel)]="correo" type="correo" label="Correo"></ion-input>
+      <br>
+      <ion-input [(ngModel)]="contrasena" type="contrasena" label="Contraseña">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+      <br>
+      <ion-button (click)="login()" size="block" color="success">INGRESAR</ion-button>
+    </ion-card-content>
+  </ion-card>
+  <p>No tienes cuenta, regístrate <a routerLink="/registrarse">AQUÍ</a></p>
+  <p>¿Olvido su contraseña? <a routerLink="/recuperar">AQUÍ</a></p>
 </ion-content>

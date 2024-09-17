@@ -18,7 +18,8 @@ export class RegistrarsePage implements OnInit {
     Carrera: new FormControl('',[Validators.required]),
     fecha_nacimiento: new FormControl('',[Validators.required]),
     direccion: new FormControl('',[Validators.required]),
-    Correo: new FormControl('',[Validators.required,Validators.pattern("([a-zA-Z0-9]([^ @&%$\\\/()=?¿!.,:;]?|\d?)+[a-zA-Z0-9][\.]){1,2}")])
+    correo: new FormControl('',[Validators.required,Validators.pattern("([a-zA-Z0-9]([^ @&%$\\\/()=?¿!.,:;]?|\d?)+[a-zA-Z0-9][\.]){1,2}")]),
+    contrasena: new FormControl('',[Validators.required])
   })
 
   public alertButtons =[
@@ -44,7 +45,7 @@ export class RegistrarsePage implements OnInit {
   }
 
   public registro():void{
-    console.log(this.usuario.value);
+    console.log(this.Usuario.value);
     this.router.navigate(['/login']);
   }
 
