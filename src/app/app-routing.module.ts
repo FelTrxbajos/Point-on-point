@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-   {
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: '',
-    redirectTo: 'inicio',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -37,21 +37,11 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
-  {
-    path: 'verificacion',
-    loadChildren: () => import('./pages/verificacion/verificacion.module').then( m => m.VerificacionPageModule)
-  },
+  
   {
     path: 'menu',
     loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
   },
-  {
-    path: 'registro-uber',
-    loadChildren: () => import('./pages/registro-uber/registro-uber.module').then( m => m.RegistroUberPageModule)
-  },
-
-
-
 
 ];
 

@@ -1,22 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="warning">
-    <ion-title></ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-  <ion-card>
-  <ion-card-header>Inicio de sesión</ion-card-header>
-    <ion-card-content>
-      <ion-input [(ngModel)]="correo" type="correo" label="Correo"></ion-input>
-      <br>
-      <ion-input [(ngModel)]="contrasena" type="contrasena" label="Contraseña">
-        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-      </ion-input>
-      <br>
-      <ion-button (click)="login()" size="block" color="success">INGRESAR</ion-button>
-    </ion-card-content>
-  </ion-card>
-  <p>No tienes cuenta, regístrate <a routerLink="/registrarse">AQUÍ</a></p>
-  <p>¿Olvido su contraseña? <a routerLink="/recuperar">AQUÍ</a></p>
+  <div class="outer-container">
+    <div class="imagen-logo">
+      <img src="assets/icon/POINT ON POIN_20240923_001059_0000.png" class="logo" />
+    </div>
+ 
+
+    <div class="login-container">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title >Iniciar Sesión</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form (ngSubmit)="login()">
+            <ion-item>
+              <ion-input [(ngModel)]="email" id="email" name="email" type="text" fill="solid" label="Correo Electrónico" labelPlacement="floating" placeholder="email@duocuc.cl"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input [(ngModel)]="password" id="password" name="password" type="password" fill="solid" label="Contraseña" labelPlacement="floating"></ion-input>
+            </ion-item>
+            
+            <ion-button expand="block" shape="round" type="submit">Iniciar Sesión</ion-button>
+          </form>
+          <br>
+          <p style="text-align:center;"> ¿No tienes cuenta? <a routerLink="/registrarse">Registrarse</a>
+            ||<a style="text-align:center;" routerLink="/recuperar"> Olvide mi contraseña </a>
+          </p>
+          
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

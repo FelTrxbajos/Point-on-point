@@ -1,0 +1,44 @@
+.imagen-logo {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%; 
+  height: 100%;
+  padding-right: 330px; 
+}
+
+.logo {
+  max-width: 200px; 
+  height: auto;
+}
+ion-button {
+    margin-top: 100px;
+    --background: linear-gradient(to right, #eaf734, #eaf734);
+
+  }
+
+  ion-item {
+    margin-bottom: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    box-sizing: border-box;
+  }
+
+  
+  ion-card {
+  width: 100%; 
+  max-width: 800px; 
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  }
+
+.login-container {
+    width: 100%; 
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    margin: auto; 
+  }

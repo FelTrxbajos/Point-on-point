@@ -1,43 +1,113 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registrarse</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
 
-  <ion-content>
-    <ion-card>
-      <form [formGroup]="Usuario" (ngSubmit)="registro()">
-        <ion-input formControlName="nombre" type="text" label="Nombre"></ion-input>
-        <ion-input formControlName="apellido" type="text" label="Apellido"></ion-input>
-        <ion-input formControlName="rut" type="text" label="Rut"></ion-input>
-        <ion-select formControlName="genero" label="Género" cancelText="No responder">
-          <ion-select-option>Masculino</ion-select-option>
-          <ion-select-option>Femenino</ion-select-option>
-          <ion-select-option>Otro</ion-select-option>
-        </ion-select>
-        <ion-select formControlName="sede" label="Sede" cancelText="No responder">
-          <ion-select-option>Puente alto</ion-select-option>
-          <ion-select-option>Vespusio</ion-select-option>
-          <ion-select-option>San Joaquin</ion-select-option>
-        </ion-select>
-        <ion-select formControlName="carrera" label="Carrera" cancelText="No responder">
-          <ion-select-option>Ing.Informatica</ion-select-option>
-          <ion-select-option>Conectividad y redes</ion-select-option>
-          <ion-select-option>Analista programador</ion-select-option>
-        </ion-select>
-        <ion-input formControlName="fecha_nacimiento" type="date" label="Fecha nacimiento"></ion-input>
-        <ion-input formControlName="direccion" type="text" label="Dirección"></ion-input>
-        <ion-input formControlName="correo" type="text" label="Correo"></ion-input>
-        <ion-input formControlName="correo" type="text" label="Confirmar correo"></ion-input>
-        <ion-input formControlName="contrasena" type="text" label="Contraseña"></ion-input>
-        <ion-input formControlName="contrasena" type="text" label="Confirmar contraseña"></ion-input>
-        
+  <div class="outer-container">
+    <div class="imagen-logo">
+      <img src="assets/icon/POINT ON POIN_20240923_001059_0000.png" class="logo" />
+    </div>
+    <div class="login-container">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Registrarse</ion-card-title>
+        </ion-card-header>
 
-      </form>
-    </ion-card>
-  </ion-content>
+        <ion-card-content>
+          <form [formGroup]="user" (ngSubmit)="submit()">
 
+            <ion-item>
+              <ion-input id="name" formControlName="name" type="text" fill="solid" label="Nombre"
+                labelPlacement="floating"></ion-input>
+            </ion-item>
 
+            <ion-item *ngIf="user.get('name')?.invalid && (user.get('name')?.touched || user.get('name')?.dirty)">
+              <ion-label color="danger">Nombre inválido</ion-label>
+            </ion-item>
+            
+            <ion-item>
+              <ion-input id="rut" formControlName="rut" type="text" fill="solid" label="RUT"
+                labelPlacement="floating"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="user.get('rut')?.invalid && (user.get('rut')?.touched || user.get('rut')?.dirty)">
+              <ion-label color="danger">Rut inválido, debe de ingresar guión y el número verificador</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-input id="birthdate" formControlName="birthdate" type="date" fill="solid" labelPlacement="floating"
+                label="Fecha de Nacimiento"></ion-input>
+            </ion-item>
+
+            
+
+            <ion-item>
+              <ion-select formControlName="gender" fill="solid" labelPlacement="floating" label="Género">
+                <ion-select-option>Masculino</ion-select-option>
+                <ion-select-option>Femenino</ion-select-option>
+                <ion-select-option>Otro</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-input id="email" formControlName="email" type="text" fill="solid" label="Correo Electrónico"
+                labelPlacement="floating"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="user.get('email')?.invalid && (user.get('email')?.touched || user.get('email')?.dirty)">
+              <ion-label color="danger">Correo electrónico inválido</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-input id="password" formControlName="password" type="password" fill="solid" label="Contraseña"
+                labelPlacement="floating"></ion-input>
+            </ion-item>
+            <ion-label>¿Posee un Auto?</ion-label>
+            <ion-radio-group formControlName="tiene_auto">
+              <ion-item>
+                <ion-radio slot="start" value="si"></ion-radio>
+                <ion-label>Sí</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-radio slot="start" value="no"></ion-radio>
+                <ion-label>No</ion-label>
+              </ion-item>
+            </ion-radio-group>
+
+            <ion-col size="12" size-md="6" *ngIf="user.controls['tiene_auto'].value === 'si'">
+              <ion-card class="auto-details-card">
+                <ion-card-header>
+                  <ion-card-title>Detalles del Auto</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-input formControlName="marca_auto" type="text" label="Marca Auto" labelPlacement="floating"
+                    fill="solid"></ion-input>
+                  <ion-text *ngIf="user.controls['marca_auto'].errors?.['marcaNoExiste']">
+                    <p>La marca ingresada no existe en el sistema.</p>
+                  </ion-text>
+
+                  <ion-input formControlName="patente" type="text" label="Patente" labelPlacement="floating"
+                    fill="solid"></ion-input>
+                  <ion-text color="danger" *ngIf="user.controls['patente'].errors?.['pattern']">
+                    <p>La patente debe ser válida (formato: AB1234 o ABCD12).</p>
+                  </ion-text>
+
+                  <ion-input formControlName="asientos_disp" type="number" label="Asientos Disp."
+                    labelPlacement="floating" fill="solid"></ion-input>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+
+            <ion-item>
+              <ion-input id="confirmpassword" formControlName="confirmpassword" type="password" fill="solid"
+                label="Ingrese su contraseña nuevamente" labelPlacement="floating"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="user.hasError('passwordsDoNotMatch')">
+              <ion-label color="danger">Las contraseñas no coinciden</ion-label>
+            </ion-item>
+
+            <ion-button expand="full" (click)="submit()">Registrarse</ion-button>
+            <br>
+            <p style="text-align:center;">¿Ya tienes cuenta?<a routerLink="/login"> Iniciar sesión</a></p>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  
 </ion-content>
