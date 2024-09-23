@@ -8,12 +8,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'inicio',
+    redirectTo: 'login',
     pathMatch: 'full'
-  },
-  {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
     path: 'login',
@@ -48,7 +44,11 @@ const routes: Routes = [
   {
     path: 'registro-uber',
     loadChildren: () => import('./pages/registro-uber/registro-uber.module').then( m => m.RegistroUberPageModule)
+  },  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
+
 
 
 
