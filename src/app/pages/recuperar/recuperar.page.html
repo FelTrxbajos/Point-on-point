@@ -3,9 +3,38 @@
     <ion-title>recuperar</ion-title>
   </ion-toolbar>
 </ion-header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<ion-content> 
 
-<ion-content>
-<p>Ingrese su correo para recuperar</p>
-<ion-input formControlName="correo" type="text" label="Correo"></ion-input>
+  <!-- Formulario de inicio de sesión -->
+  <div class="login-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Recuperar Contraseña</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="user" (ngSubmit)="submit()">
+          <ion-item>
+            <ion-input id="email" formControlName="email" name="email" type="text" fill="solid" label="Correo Electrónico" labelPlacement="floating"></ion-input>
+          </ion-item>
+          <ion-button expand="full" (click)="submit()">Enviar correo electrónico</ion-button>
+        </form>
+        <br>
+        <p style="text-align:center;">¿Ya tienes una cuenta?<a routerLink="/login"> Iniciar sesión</a></p>
+        <p style="text-align:center;">¿No tienes una cuenta? <a routerLink="/registro">Regístrate aquí</a></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 </ion-content>

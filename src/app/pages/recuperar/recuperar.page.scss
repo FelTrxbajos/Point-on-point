@@ -1,0 +1,42 @@
+
+  
+  .logo {
+    max-width: 400px; /*  tamaño   imagen */
+    height: auto; /*   proporción de aspecto (no mover) */
+  }
+
+
+
+  ion-card-header {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    text-align: center;      
+    margin-bottom: 16px;
+  }
+
+  ion-button {
+    margin-top: 16px;
+    --background: linear-gradient(to right, #bb03ac, #000000); /* Gradiente de colores */
+    --background-hover: linear-gradient(to right, #bb03ac, #000000); /* Color al pasar el ratón */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 16px; /* Añadir padding lateral */
+  }
+
+
+
+
+.login-container {
+    width: 100%; 
+    max-width: 5000px; /* Mas pequeña la tarjeta o mas grande */ 
+    display: flex;
+    justify-content: center;
+    margin: auto; 
+  }
+
+  
