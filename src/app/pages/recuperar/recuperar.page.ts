@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AlertController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
