@@ -1,4 +1,10 @@
-
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
 
   <div class="outer-container">
@@ -35,8 +41,6 @@
               <ion-input id="birthdate" formControlName="birthdate" type="date" fill="solid" labelPlacement="floating"
                 label="Fecha de Nacimiento"></ion-input>
             </ion-item>
-
-            
 
             <ion-item>
               <ion-select formControlName="gender" fill="solid" labelPlacement="floating" label="Género">
