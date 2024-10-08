@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,30 +10,30 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  email: string ="";
-  password: string="";
+  titulo: string = "PÁGINA DE LOGIN";
+  numero: number = 5;
+  decimal: number = 5.2;
+  existe: boolean = true;
+  fecha_hoy: Date = new Date();
+  nombres: string[] = ["Pedro","Juan","Diego"];
+  persona: any = {"nombre":"Jeison", "edad": 5};
 
-  constructor(private router: Router, private alertController: AlertController) { }
+  //NgModel:
+  email: string = "";
+  password: string = "";
+  
+  constructor(private router: Router, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
   }
 
-
-  async presentAlert(header: string, message: string) {
-    const alert = await this.alertController.create({
-      header: header,
-      message: message,
-      buttons: ['OK'],
-    });
-    await alert.present();
-  }
-
-  
-  async login() {
-    if (this.email == "prueba@duocuc.cl" && this.password =="hola123") { 
+  async login(){
+    if(await this.usuarioService.login(this.email,this.password)){
       this.router.navigate(['/home']);
-    } else {
-      await this.presentAlert('Correo o contraseña incorrectos!','');
+    }else{
+      alert("CORREO O CONTRASEÑA INCORRECTOS!");
     }
   }
+
+
 }

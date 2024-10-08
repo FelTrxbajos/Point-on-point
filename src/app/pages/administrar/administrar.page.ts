@@ -28,17 +28,19 @@ export class AdministrarPage  implements OnInit {
   constructor(private alertController: AlertController, private usuarioService: UsuarioService) { }
 
 
-  ngOnInit() {
-    this.usuarios = this.usuarioService.getUsuarios();
+  async ngOnInit() {
+    this.usuarios = await this.usuarioService.getUsuarios();
   }
 
   async registrar() {
-    if (this.usuarioService.createUsuario(this.persona.value)) {
+    if (await this.usuarioService.createUsuario(this.persona.value)) {
       await this.presentAlert('Perfecto', 'Registrado correctamente');
       this.persona.reset();
-      this.usuarios = this.usuarioService.getUsuarios();
+      this.usuarios = await this.usuarioService.getUsuarios();
+      
     } else {
       await this.presentAlert('Error', 'El usuario no se pudo registrar');
+      
     }
   }
 
@@ -46,18 +48,21 @@ export class AdministrarPage  implements OnInit {
     this.persona.patchValue(usuario);
   }
 
-  eliminar(rut: string) {
-    if (this.usuarioService.deleteUsuario(rut)) {
-      this.usuarios = this.usuarioService.getUsuarios();
+  async eliminar(rut: string) {
+    if (await this.usuarioService.deleteUsuario(rut)) {
+      this.usuarios = await this.usuarioService.getUsuarios();
+      
     }
   }
 
-  modificar() {
+  async modificar() {
     var rut_modificar = this.persona.controls.rut.value || "";
-    if (this.usuarioService.updateUsuario(rut_modificar, this.persona.value)) {
+    if (await this.usuarioService.updateUsuario(rut_modificar, this.persona.value)) {
       this.presentAlert('Perfecto!', 'Modificado correctamente');
+      this.usuarios = await this.usuarioService.getUsuarios();
     } else {
       this.presentAlert('Error!', 'No se pudo modificar');
+      
     }
   }
   anosvalidar(minAge: number, maxAge: number): ValidatorFn {

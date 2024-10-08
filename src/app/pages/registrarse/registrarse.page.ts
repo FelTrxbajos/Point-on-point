@@ -32,8 +32,8 @@ export class RegistrarsePage implements OnInit {
   
 
 
-  ngOnInit() {
-    this.usuario = this.usuarioService.getUsuarios();
+  async ngOnInit() {
+    this.usuario = await this.usuarioService.getUsuarios();
   }
 
   passwordMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
