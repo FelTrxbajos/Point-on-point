@@ -1,13 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
-  constructor() {}
+  //Vamos a crear una variable que almacenará la informacion de localStorage
+  usuario: any;
+
+  constructor(private navController: NavController) {}
+
+  ngOnInit(){
+    this.usuario = JSON.parse(localStorage.getItem("usuario")  || "");
+  }
+
+  logout(){
+    localStorage.removeItem('usuario');
+    this.navController.navigateRoot('/login');
+  }
 
 }
 

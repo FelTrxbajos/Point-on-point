@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    path: 'home',
+    canActivate: [authGuard],
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
+
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -34,14 +37,24 @@ const routes: Routes = [
   },
 
   {
-    path: '**',
-    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
-  },
-  {
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
   
+  {
+    path: 'reservas',
+    loadChildren: () => import('./pages/reservas/reservas.module').then( m => m.ReservasPageModule)
+  },
+  {
+    path: 'home/reservas/detalle-viaje/:id',
+    loadChildren: () => import('./pages/detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule)
+  },
+
+  {
+    path: '**',
+    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
+  },
+
 
 ];
 
