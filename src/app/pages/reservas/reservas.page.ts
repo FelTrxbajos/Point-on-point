@@ -43,7 +43,7 @@ export class ReservasPage implements OnInit {
       "longitud": -70.53,
       "distancia_metros": 5000,
       "tiempo_segundos": 900,
-      "estado_viaje": "en curso",
+      "estado_viaje": "pendiente",
       "pasajeros": [17888444, 15999555],
     },{
       "id": 3,
@@ -103,6 +103,14 @@ export class ReservasPage implements OnInit {
       this.latitud = e.geocode.properties['lat'];
       this.longitud = e.geocode.properties['lon'];
       this.direccion = e.geocode.properties['display_name'];
+
+      //le vamos a agregar un radio a una busqueda
+      var circulo = L.circle([this.latitud, this.longitud],{
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+      }).addTo(this.map!);
 
       if(this.map){
         L.Routing.control({

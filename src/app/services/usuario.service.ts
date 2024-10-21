@@ -4,8 +4,6 @@ import { Storage } from '@ionic/storage-angular';
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class UsuarioService {
 
   constructor(private storage :Storage) {
@@ -29,12 +27,12 @@ export class UsuarioService {
 
 
   //DAO
-  async createUsuario(usuario:any): Promise<boolean>{
+  public async createUsuario(usuario:any): Promise<boolean>{
     let usuarios: any[] = await this.storage.get("usuarios") || [];
-    if (usuarios.find(usu=>usu.rut==usuario.rut)!=undefined){
+    if(usuarios.find(usu=>usu.rut==usuario.rut)!=undefined){
       return false;
     }
-    usuario.push(usuario);
+    usuarios.push(usuario);
     await this.storage.set("usuarios",usuarios);
     return true;
   }

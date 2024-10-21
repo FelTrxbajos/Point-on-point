@@ -18,7 +18,7 @@
         </ion-card-header>
 
         <ion-card-content>
-          <form [formGroup]="user" (ngSubmit)="submit()">
+          <form [formGroup]="user" (ngSubmit)="registrar()">
 
             <ion-item>
               <ion-input id="name" formControlName="name" type="text" fill="solid" label="Nombre"
@@ -107,8 +107,8 @@
 
            
 
-            <ion-button expand="full" (click)="submit()">Registrarse</ion-button>
-            <br>
+            <ion-button expand="full" type="submit">Registrarse</ion-button>
+          
             <p style="text-align:center;">¿Ya tienes cuenta?<a routerLink="/login"> Iniciar sesión</a></p>
           </form>
         </ion-card-content>
