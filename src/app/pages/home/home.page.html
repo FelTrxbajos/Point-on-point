@@ -23,14 +23,13 @@
       <ion-tab-button tab="administrar" *ngIf="usuario.tipo_usuario=='Usario'">
         <ion-icon name="key-sharp"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="perfil">
+      <ion-tab-button routerLink="/perfil">
         <ion-icon name="person-sharp"></ion-icon>
       </ion-tab-button>
-      <ion-tab-button tab="home">
+      <ion-tab-button routerLink="/home"  >
         <ion-icon name="home-outline"></ion-icon>
       </ion-tab-button>
       
-
     </ion-tab-bar>
   </ion-tabs>
 
