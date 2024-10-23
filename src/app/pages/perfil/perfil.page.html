@@ -1,12 +1,19 @@
 <ion-content>
-  <p>hola</p>
+  <p>Perfil</p>
   <ion-tabs>
-    
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button routerLink="/home"  >
+    <ion-tab-bar slot="bottom" class="tab-bar-custom">
+      <ion-tab-button routerLink="/home">
         <ion-icon name="home-outline"></ion-icon>
       </ion-tab-button>
-      
     </ion-tab-bar>
   </ion-tabs>
-</ion-content>
+  
+  <div class="avatar-container">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+      <ion-label>{{usuario.nombre}}</ion-label>
+    </ion-item>
+    <p style="text-align:center;"><a routerLink="/detalle-viaje">Ver mis viajes</a>
+  </div>
