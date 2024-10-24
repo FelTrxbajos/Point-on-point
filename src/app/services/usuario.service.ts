@@ -14,13 +14,18 @@ export class UsuarioService {
     await this.storage.create();
     let admin = {
         "rut": "16666666-6",
-        "nombre": "alambrito",
-        "fecha_nacimiento": "1990-03-24",
-        "genero": "Masculino",
-        "correo": "admin@duocuc.cl",
-        "contrasena": "Admin123.",
-        "valida_contrasena": "Admin123.",
-        "tipo_usuario": "Administrador"
+        "name:": "felipe",
+        "birthdate": "1990-03-24",
+        "gender": "Masculino",
+        "email": "admin@duocuc.cl",
+        "password": "Admin123.",
+        "confirmpassword": "Admin123.",
+        "tipo_usuario": "Administrador",
+        "tiene_auto": "no",
+        "marca_auto": "",
+        "asientos_disp": "",
+        "patente": "",
+
     };
     await this.createUsuario(admin);
   }
@@ -69,9 +74,9 @@ export class UsuarioService {
     return true;
   }
 
-  public async login(correo: string, contrasena: string): Promise<any> {
+  public async login(email: string, password: string): Promise<any> {
     let usuarios: any[] = await this.storage.get("usuarios") || [];
-    const usu = usuarios.find(elemento=> elemento.correo == correo && elemento.contrasena == contrasena);
+    const usu = usuarios.find(elemento=> elemento.email == email && elemento.password == password);
     if(usu){
       localStorage.setItem("usuario", JSON.stringify(usu));
       return true;
