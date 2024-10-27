@@ -12,7 +12,8 @@ El regreso a las clases presenciales en las instituciones de educación superior
 - Reduzca la dependencia del transporte público en horarios nocturnos mediante la implementación de alternativas de transporte.
 
 ----------------------------------------------------------------------------------
-📲 Instalación
+📲 #Instalación
+
 Sigue estos pasos para instalar y ejecutar el proyecto localmente:
 
 1-🗂️ Crea un repositorio en GitHub para el proyecto.
@@ -37,12 +38,16 @@ ionic serve
 El proyecto requiere las siguientes tecnologías:
 
 1.🐙 GitHub - Repositorio y control de versiones.
+
 2-🖥️ Git Bash - Herramienta para clonar y manejar repositorios.
+
 3-🌐 Node.js - Entorno de ejecución para JavaScript.
+
 4-⚡ Angular - Framework para el frontend.
+
 5-📱 Ionic Framework - Desarrollo de aplicaciones móviles.
 ----------------------------------------------------------------------------------
-#🚀 Uso
+🚀 #Uso
 
 La aplicación funciona de manera similar a Uber. Los estudiantes pueden:
 
