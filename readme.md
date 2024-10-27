@@ -5,7 +5,7 @@ Esta aplicación móvil está diseñada para estudiantes de DuocUC, ofreciendo u
 ----------------------------------------------------------------------------------
 Necesidad
 
-El regreso a las clases presenciales en las instituciones de educación superior ha generado una serie de desafíos logísticos, especialmente en lo que respecta al transporte de los estudiantes al final de la jornada vespertina. Este problema surge debido a la falta de disponibilidad de transporte público, el alto costo de servicios de transporte privado y la falta de transporte propio para muchos estudiantes. Además, la institución educativa no ofrece alternativas de transporte facilitado, lo que afecta la seguridad y comodidad de los alumnos. Para abordar estas necesidades, se propone una solución que:
+El regreso a las clases presenciales despues de la pandemia hizo que las instituciones de educación superior generen una serie de desafíos logísticos, especialmente en lo que respecta al transporte de los estudiantes al final de la jornada vespertina. Este problema surge debido a la falta de disponibilidad de transporte público, el alto costo de servicios de transporte privado y la falta de transporte propio para muchos estudiantes. Además, la institución educativa no ofrece alternativas de transporte facilitado, lo que afecta la seguridad y comodidad de los alumnos. Para abordar estas necesidades, se propone una solución que:
 
 - Facilite el acceso a opciones de transporte seguro y accesible para los estudiantes.
 
@@ -31,9 +31,10 @@ cd tu-repositorio
 npm install
 
 # Ejecuta la Aplicación 
+
 ionic serve
 ----------------------------------------------------------------------------------
-#🛠️ Dependencias
+🛠️ Dependencias
 
 El proyecto requiere las siguientes tecnologías:
 
@@ -47,7 +48,7 @@ El proyecto requiere las siguientes tecnologías:
 
 5-📱 Ionic Framework - Desarrollo de aplicaciones móviles.
 ----------------------------------------------------------------------------------
-🚀 #Uso
+🚀 Uso
 
 La aplicación funciona de manera similar a Uber. Los estudiantes pueden:
 
