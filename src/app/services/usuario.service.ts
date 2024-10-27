@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class UsuarioService {
+  private usuarioAutenticado: any = null;
 
   constructor(private storage :Storage) {
     this.init();
@@ -14,17 +15,17 @@ export class UsuarioService {
     await this.storage.create();
     let admin = {
         "rut": "16666666-6",
-        "name:": "felipe",
+        "name:": "Admin",
         "birthdate": "1990-03-24",
         "gender": "Masculino",
         "email": "admin@duocuc.cl",
-        "password": "Admin123.",
-        "confirmpassword": "Admin123.",
+        "password": "123",
+        "confirmpassword": "123",
         "tipo_usuario": "Administrador",
-        "tiene_auto": "no",
-        "marca_auto": "",
-        "asientos_disp": "",
-        "patente": "",
+        "tiene_auto": "si",
+        "marca_auto": "BMW",
+        "asientos_disp": "2",
+        "patente": "XXPP32",
 
     };
     await this.createUsuario(admin);
@@ -42,12 +43,12 @@ export class UsuarioService {
     return true;
   }
 
-  public async getUsuario(rut: string): Promise <any> {
+  public async getUsuario(rut:string): Promise<any>{
     let usuarios: any[] = await this.storage.get("usuarios") || [];
     return usuarios.find(usu=>usu.rut==rut);
   }
 
-  public async getUsuarios():Promise <any[]> {
+  public async getUsuarios(): Promise<any[]>{
     let usuarios: any[] = await this.storage.get("usuarios") || [];
     return usuarios;
   }
@@ -84,8 +85,36 @@ export class UsuarioService {
     return false;
   }
 
-  public async recuperarUsuario(correo: string): Promise<any> {
+  public async authenticate(email: string, password: string): Promise<boolean> {
+    try {
+      const usuarios: any[] = await this.getUsuarios();
+      const usuario = usuarios.find(user => user.email === email && user.password === password);
+      if (usuario) {
+        this.usuarioAutenticado = usuario;
+        localStorage.setItem('user', JSON.stringify(usuario));
+        return true; 
+      }
+      return false; 
+    } catch (error) {
+      console.error('Error al autenticar:', error);
+      return false;
+    }
+  }
+
+  public async recuperarUsuario(email: string): Promise<any> {
     let usuarios: any[] = await this.storage.get("usuarios") || [];
-    return usuarios.find(elemento=> elemento.correo == correo);
+    return usuarios.find(elemento=> elemento.email == email);
+  }
+
+  public async getUsuarioAutenticado(): Promise<any> {
+    if (!this.usuarioAutenticado) {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        this.usuarioAutenticado = JSON.parse(userData);
+      }
+    }
+    return this.usuarioAutenticado;
   }
 }
+
+  

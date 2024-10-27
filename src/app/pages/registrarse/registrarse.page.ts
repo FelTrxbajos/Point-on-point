@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-registrarse',
@@ -15,7 +12,7 @@ export class RegistrarsePage implements OnInit {
 
   
   user = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+(\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+)*$/)]),
+    name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+(\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+("3,0"))*$/)]),
     rut: new FormControl('', [Validators.required, Validators.pattern(/^\d{6,8}-[kK0-9]$/)]),
     email: new FormControl('', [Validators.required, Validators.pattern("[a-zA-Z0-9._%+-]+@duocuc.cl")]),
     birthdate: new FormControl('',[Validators.required]),
@@ -24,8 +21,9 @@ export class RegistrarsePage implements OnInit {
     asientos_disp: new FormControl('', []),
     patente: new FormControl('', [Validators.pattern(/^[A-Z]{2}[0-9]{4}$|^[A-Z]{4}[0-9]{2}$/)]),
     gender: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    confirmpassword: new FormControl('', [Validators.required])
+    password: new FormControl('',[Validators.required, Validators.pattern("^(?=.*[-!#$%&/()?¡_.])(?=.*[A-Za-z])(?=.*[a-z]).{8,}$")]),
+    confirmpassword: new FormControl('',[Validators.required, Validators.pattern("^(?=.*[-!#$%&/()?¡_.])(?=.*[A-Za-z])(?=.*[a-z]).{8,}$")]),
+    tipo_usuario: new FormControl('Alumno')
   }); 
 
   marca_auto: string[] = [
@@ -41,7 +39,6 @@ export class RegistrarsePage implements OnInit {
     'wuling', 'baojun', 'gac', 'hummer'
   ];
 
-  
 
   constructor(private router: Router, private usuarioService: UsuarioService) {
     this.user.get("rut")?.setValidators([Validators.required,Validators.pattern("[0-9]{7,8}-[0-9kK]{1}"),this.validarRut()]);
@@ -49,9 +46,7 @@ export class RegistrarsePage implements OnInit {
 
   ngOnInit() {
   }
-
   
-
   public async registrar(){
     if( !this.validarEdad18(this.user.controls.birthdate.value || "") ){
       alert("ERROR! debe tener al menos 18 años para registrarse!");
@@ -79,10 +74,10 @@ export class RegistrarsePage implements OnInit {
  
 
   //valido la edad:
-  validarEdad18(fecha_nacimiento: string){
+  validarEdad18(birthdate: string){
     var edad = 0;
-    if(fecha_nacimiento){
-      const fecha_date = new Date(fecha_nacimiento);
+    if(birthdate){
+      const fecha_date = new Date(birthdate);
       const timeDiff = Math.abs(Date.now() - fecha_date.getTime());
       edad = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
     }

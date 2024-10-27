@@ -1,0 +1,15 @@
+ion-card {
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+    };
+    .imagen-logo {
+        max-width: 50px;
+        height: auto; /* Mantiene la relación de aspecto */
+      }
+    
+      ion-fab {
+        margin-bottom: var(--ion-safe-area-bottom, 0);
+      }

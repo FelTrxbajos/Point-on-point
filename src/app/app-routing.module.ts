@@ -49,11 +49,24 @@ const routes: Routes = [
     path: 'home/reservas/detalle-viaje/:id',
     loadChildren: () => import('./pages/detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule)
   },
+  {
+    path: 'viaje',
+    loadChildren: () => import('./pages/viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+
+  {
+    path: 'crear-viajes',
+    loadChildren: () => import('./pages/crear-viajes/crear-viajes.module').then( m => m.CrearViajesPageModule)
+  },
 
   {
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+  
+
+  
+
 
 
 ];

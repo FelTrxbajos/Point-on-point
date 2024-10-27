@@ -59,15 +59,14 @@
 
             <ion-item>
               <ion-input id="password" formControlName="password" type="password" fill="solid" label="Contraseña"
-                labelPlacement="floating"></ion-input>
-
-                <ion-item>
-                  <ion-input id="confirmpassword" formControlName="confirmpassword" type="password" fill="solid"
-                    label="Ingrese su contraseña nuevamente" labelPlacement="floating"></ion-input>
-                </ion-item>
-                <ion-item *ngIf="user.hasError('passwordsDoNotMatch')">
-                  <ion-label color="danger">Las contraseñas no coinciden</ion-label>
-                </ion-item>
+                labelPlacement="floating"></ion-input> 
+            </ion-item>
+            <ion-item>
+              <ion-input id="confirmpassword" formControlName="confirmpassword" type="password" fill="solid"
+                label="Ingrese su contraseña nuevamente" labelPlacement="floating"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="user.hasError('passwordsDoNotMatch')">
+              <ion-label color="danger">Las contraseñas no coinciden</ion-label>
             </ion-item>
             <ion-label>¿Posee un Auto?</ion-label>
             <ion-radio-group formControlName="tiene_auto">

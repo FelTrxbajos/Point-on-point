@@ -1,18 +1,19 @@
-<ion-content> 
-  <div class="login-container">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Recuperar Contraseña</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <h1>Ingrese su correo electronico</h1>
-        <form [formGroup]="user" (ngSubmit)="submit()">
-          <ion-item>
-            <ion-input id="email" formControlName="email" name="email" type="text" fill="solid"  labelPlacement="floating"></ion-input>
-          </ion-item>
-          <ion-button expand="full" (click)="submit()">Enviar correo electrónico</ion-button>
-        </form> 
-      </ion-card-content>
-    </ion-card>
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recuperar</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>Recuperar de usuario</ion-card-header>
+    <ion-card-content>
+      <ion-input [(ngModel)]="email" type="email" label="Correo" labelPlacement="stacked" fill="outline"></ion-input>
+      <br>
+      <ion-button (click)="recuperar()" size="block" color="success">RECUPERAR</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

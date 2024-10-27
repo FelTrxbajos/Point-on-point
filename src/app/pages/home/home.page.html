@@ -1,34 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <p slot="end">Bienvenido: {{usuario.name | titlecase}}</p>
+    <img 
+      src="assets/icon/POINT ON POIN_20240923_001059_0000.png" 
+      alt="Logo de la aplicación" 
+      class="imagen-logo" 
+    />
     <ion-buttons slot="end">
-      <ion-button routerLink="/login" >
-        <ion-icon name="log-out"></ion-icon>
+      <ion-button (click)="logout()" aria-label="Cerrar sesión">
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>
-      Home
-    </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <ion-card>
+    <ion-card-content>
+      <p>Bienvenido: {{usuario.name | titlecase}}</p>
+    </ion-card-content>
+  </ion-card>
   
-  <ion-tabs>
+
     
+  <ion-tabs>
     <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="reservas">
-        <ion-icon name="calendar-number-sharp"></ion-icon>
-      </ion-tab-button>
-      <ion-tab-button tab="administrar" *ngIf="usuario.tipo_usuario=='Usario'">
-        <ion-icon name="key-sharp"></ion-icon>
-      </ion-tab-button>
-      <ion-tab-button routerLink="/perfil">
-        <ion-icon name="person-sharp"></ion-icon>
-      </ion-tab-button>
-      <ion-tab-button routerLink="/home"  >
+      
+      <ion-tab-button tab="reservas"  >
         <ion-icon name="home-outline"></ion-icon>
       </ion-tab-button>
+      <ion-tab-button tab="crear-viajes" *ngIf="usuario.tiene_auto=='si'" >
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="viaje"  >
+        <ion-icon name="newspaper-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="perfil">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="administrar" *ngIf="usuario.tipo_usuario=='Administrador'">
+        <ion-icon name="key-outline"></ion-icon>
+      </ion-tab-button>
+      
       
     </ion-tab-bar>
   </ion-tabs>

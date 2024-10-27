@@ -9,11 +9,11 @@ import 'leaflet-routing-machine';
 import { ViajeService } from 'src/app/services/viaje.service';
 
 @Component({
-  selector: 'app-reservas',
-  templateUrl: './reservas.page.html',
-  styleUrls: ['./reservas.page.scss'],
+  selector: 'app-crear-viajes',
+  templateUrl: './crear-viajes.page.html',
+  styleUrls: ['./crear-viajes.page.scss'],
 })
-export class ReservasPage implements OnInit {
+export class CrearViajesPage implements OnInit {
 
   
   //vamos a crear variable(s) para controlar el mapa:

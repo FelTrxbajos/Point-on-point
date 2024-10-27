@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-recuperar',
@@ -9,38 +8,21 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./recuperar.page.scss'],
 })
 export class RecuperarPage implements OnInit {
-  user: FormGroup;
 
-  constructor(private alertController: AlertController) {
-    this.user = new FormGroup({
-      email: new FormControl('', [Validators.required,Validators.pattern("[a-zA-Z0-9._%+-]+@duocuc.cl")])
-    });
-  }
+  //variable:
+  email: string = "";
+
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit() {
   }
 
-
-
-  async presentAlert(header: string, message: string) {
-    const alert = await this.alertController.create({
-      header: header,
-      message: message,
-      buttons: ['OK'],
-    });
-    await alert.present();
-  }
-
-
-  async submit() {
-    if (this.user.valid) {
-      await this.presentAlert('Se ha enviado un codigo a su correo electronico','');
-      this.user.reset();
-    } else {
-      await this.presentAlert('Correo no válido','');
+  async recuperar(){
+    if(await this.usuarioService.recuperarUsuario(this.email)){
+      alert("Revisa tu correo para encontrar la nueva contraseña!")
+      this.router.navigate(['/login']);
+    }else{
+      alert("ERROR! el usuario no existe!")
     }
   }
-
-
-
 }

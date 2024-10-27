@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReservasPageRoutingModule } from './reservas-routing.module';
+import { CrearViajesPageRoutingModule } from './crear-viajes-routing.module';
 
-import { ReservasPage } from './reservas.page';
+import { CrearViajesPage } from './crear-viajes.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReservasPageRoutingModule,
+    CrearViajesPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [ReservasPage]
+  declarations: [CrearViajesPage]
 })
-export class ReservasPageModule {}
+export class CrearViajesPageModule {}

@@ -20,8 +20,20 @@ const routes: Routes = [
         path: 'perfil',
         loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule)
       },
-      
-    
+      {
+        path: 'viaje',
+        loadChildren: () => import('../viaje/viaje.module').then( m => m.ViajePageModule)
+      },
+      {
+        path: 'crear-viajes',
+        loadChildren: () => import('../crear-viajes/crear-viajes.module').then( m => m.CrearViajesPageModule)
+      },
+      {
+        path: 'detalle-viaje',
+        loadChildren: () => import('../detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule)
+      },
+
+
     ]
   }
 ];

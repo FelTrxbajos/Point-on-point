@@ -1,0 +1,20 @@
+<ion-content>
+  <div value="crear_viaje" (click)="initMap()">
+    <ion-item slot="header" color="light">
+      <ion-label>Crear viaje</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">
+      <!--Mapa-->
+      <div id="map_html"></div>
+      <!--Formulario para crear un viaje-->
+      <form [formGroup]="viaje" (ngSubmit)="crearViaje()">
+        <ion-input type="number" labelPlacement="stacked" label="Asientos disp." formControlName="asientos_disp"></ion-input>
+        <ion-input type="number" labelPlacement="stacked" label="Valor" formControlName="valor"></ion-input>
+        <ion-input labelPlacement="stacked" label="Destino" formControlName="nombre_destino"></ion-input>
+        <ion-input labelPlacement="stacked" label="Distancia (metros)" formControlName="distancia_metros"></ion-input>
+        <ion-input type="number" labelPlacement="stacked" label="Minutos" formControlName="tiempo_minutos"></ion-input>
+        <ion-button [disabled]="viaje.invalid" type="submit" size="block">Crear viaje</ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
