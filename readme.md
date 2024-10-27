@@ -31,8 +31,8 @@ cd tu-repositorio
 npm install
 
 # Ejecuta la Aplicación 
-
 ionic serve
+
 ----------------------------------------------------------------------------------
 🛠️ Dependencias
 
@@ -47,6 +47,7 @@ El proyecto requiere las siguientes tecnologías:
 4-⚡ Angular - Framework para el frontend.
 
 5-📱 Ionic Framework - Desarrollo de aplicaciones móviles.
+
 ----------------------------------------------------------------------------------
 🚀 Uso
 
