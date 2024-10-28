@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {v4 as uuidv4} from 'uuid';
 
@@ -7,6 +8,7 @@ import * as L from 'leaflet';
 import * as G from 'leaflet-control-geocoder';
 import 'leaflet-routing-machine';
 import { ViajeService } from 'src/app/services/viaje.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-crear-viajes',
@@ -15,13 +17,12 @@ import { ViajeService } from 'src/app/services/viaje.service';
 })
 export class CrearViajesPage implements OnInit {
 
-  
-  //vamos a crear variable(s) para controlar el mapa:
+
   private map: L.Map | undefined;
   private geocoder: G.Geocoder | undefined;
   usuario: any;
-  
-  //variable de grupo:
+  siEdita = false;
+
   viaje = new FormGroup({
     id: new FormControl('',[Validators.required]),
     conductor: new FormControl('',[Validators.required]),
@@ -36,8 +37,9 @@ export class CrearViajesPage implements OnInit {
     pasajeros: new FormControl([])
   });
   viajes: any[] = [];
+ 
 
-  constructor(private viajeService: ViajeService) { }
+  constructor(private usuarioService: UsuarioService, private viajeService: ViajeService,  private alertController: AlertController) { }
 
   async ngOnInit() {
     this.usuario = JSON.parse(localStorage.getItem("usuario") || '');
@@ -47,30 +49,25 @@ export class CrearViajesPage implements OnInit {
 
   initMap(){
     try {
-      //ACA CARGAMOS E INICIALIZAMOS EL MAPA:
       this.map = L.map("map_html").locate({setView:true, maxZoom:16});
-      //this.map = L.map("map_html").setView([-33.608552227594245, -70.58039819211703],16);
-      
-      //ES LA PLANTILLA PARA QUE SEA VEA EL MAPA:
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(this.map);
   
       this.map.on('locationfound', (e)=>{
-        console.log(e.latlng.lat);
-        console.log(e.latlng.lng);
+        
       });
+      
   
-      //VAMOS A AGREGAR UN BUSCADOR DE DIRECCIONES EN EL MAPA:
       this.geocoder = G.geocoder({
         placeholder: "Ingrese dirección a buscar",
         errorMessage: "Dirección no encontrada"
       }).addTo(this.map);
   
-      //VAMOS A REALIZAR UNA ACCIÓN CON EL BUSCADOR, CUANDO OCURRA ALGO CON EL BUSCADOR:
+
       this.geocoder.on('markgeocode', (e)=>{
-        //cargo el formulario:
+
         let lat = e.geocode.properties['lat'];
         let lon = e.geocode.properties['lon'];
         this.viaje.controls.nombre_destino.setValue(e.geocode.properties['display_name']);
@@ -81,7 +78,7 @@ export class CrearViajesPage implements OnInit {
         
         if(this.map){
           L.Routing.control({
-            waypoints: [L.latLng(-33.608552227594245, -70.58039819211703),
+            waypoints: [L.latLng(-33.59834375360674, -70.57859259302508),
               L.latLng(lat,lon)],
               fitSelectedRoutes: true,
             }).on('routesfound', (e)=>{
@@ -94,7 +91,6 @@ export class CrearViajesPage implements OnInit {
     }
   }
 
-  //creamos un viaje:
   async crearViaje(){
     if(await this.viajeService.createViaje(this.viaje.value)){
       alert("VIAJE CREADO!");
@@ -107,4 +103,71 @@ export class CrearViajesPage implements OnInit {
     this.viajes = await this.viajeService.getViajes();
   }
 
+  async actualizarViaje() {
+    const viajeId = this.viaje.controls.id.value; 
+    if (!viajeId) {
+        alert("El ID del viaje no puede estar vacío.");
+        return; 
+    }
+    if (await this.viajeService.updateViaje(viajeId, this.viaje.value)) {
+        alert("Viaje actualizado!");
+        await this.rescatarViajes();
+        this.viaje.reset();  
+    } else {
+        alert("No se puede modificar el destino del viaje");
+    }
+}
+
+
+  async eliminarViaje(id: string) {
+    if (await this.viajeService.deleteViaje(id)) {
+      await this.rescatarViajes();
+      const alert = await this.alertController.create({
+        header: 'viaje eliminado',
+        message: 'El viaje ha sido eliminado con éxito.',
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.eliminarViaje(id);
+            },
+          },
+        ],
+      });
+      await alert.present();
+      this.viaje.reset();  
+    } else {
+    }
+  }
+
+  async confirmarEliminacionViaje(id: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación de viaje',
+      message: '¿Estás seguro que quieres eliminar este viaje?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.eliminarViaje(id);
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+
+  buscar(viaje: any) {
+    this.siEdita = true;
+    this.viaje.patchValue(viaje);
+  }
+
+  async obtenerUsuario() {
+    this.usuario = await this.usuarioService.getUsuarioAutenticado();
+  }
+  
 }

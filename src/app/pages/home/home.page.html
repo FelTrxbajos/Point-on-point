@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <img 
-      src="assets/icon/POINT ON POIN_20240923_001059_0000.png" 
+      src="assets/icon/POINT ON POINtt PGN-01.png" 
       alt="Logo de la aplicación" 
       class="imagen-logo" 
     />
@@ -13,27 +13,20 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <p>Bienvenido: {{usuario.name | titlecase}}</p>
-    </ion-card-content>
-  </ion-card>
-  
+  <div class="titulo">
+      <h3>¡Bienvenido/a {{usuario.name}}!</h3>
+      <h5>Te estábamos esperando, ¿A dónde vamos?</h5>
+  </div>
 
-    
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       
-      <ion-tab-button tab="reservas"  >
-        <ion-icon name="home-outline"></ion-icon>
+      <ion-tab-button tab="reservas">
+        <ion-icon name="file-tray-full-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="crear-viajes" *ngIf="usuario.tiene_auto=='si'" >
         <ion-icon name="cloud-upload-outline"></ion-icon>
-      </ion-tab-button>
-      <ion-tab-button tab="viaje"  >
-        <ion-icon name="newspaper-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="perfil">
         <ion-icon name="person-outline"></ion-icon>
@@ -41,9 +34,6 @@
       <ion-tab-button tab="administrar" *ngIf="usuario.tipo_usuario=='Administrador'">
         <ion-icon name="key-outline"></ion-icon>
       </ion-tab-button>
-      
-      
     </ion-tab-bar>
   </ion-tabs>
-
 </ion-content>

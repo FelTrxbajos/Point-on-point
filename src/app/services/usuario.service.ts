@@ -13,22 +13,21 @@ export class UsuarioService {
 
   async init(){
     await this.storage.create();
-    let admin = {
+    let usuario = {
+        "name": "admin",
         "rut": "16666666-6",
-        "name:": "Admin",
         "birthdate": "1990-03-24",
         "gender": "Masculino",
         "email": "admin@duocuc.cl",
-        "password": "123",
-        "confirmpassword": "123",
+        "password": "Admin123.",
+        "confirmpassword": "Admin123.",
         "tipo_usuario": "Administrador",
         "tiene_auto": "si",
         "marca_auto": "BMW",
         "asientos_disp": "2",
         "patente": "XXPP32",
-
     };
-    await this.createUsuario(admin);
+    await this.createUsuario(usuario);
   }
 
 

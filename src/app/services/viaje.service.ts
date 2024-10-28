@@ -56,5 +56,20 @@ export class ViajeService {
     return true;
   }
 
+  public async modificar_viaje(id: string, pasajero: any): Promise<boolean>{
+    let viajes: any[] = await this.storage.get("viajes") || [];
+    let indice: number = viajes.findIndex(v => v.id==id);
+    if(indice==-1){
+      return false;
+    }
+    if(viajes[indice].pasajeros.find((pasajero: any) => pasajero.rut == pasajero.rut)){
+      return false;
+    }
+    viajes[indice].pasajeros.push(pasajero);
+    viajes[indice].asientos_disp = viajes[indice].asientos_disp - 1;
+    await this.storage.set("viajes",viajes);
+    return true;
+  }
+
 
 }

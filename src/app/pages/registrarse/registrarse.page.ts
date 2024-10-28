@@ -33,10 +33,7 @@ export class RegistrarsePage implements OnInit {
     'lincoln', 'maserati', 'mazda', 'mclaren', 'mercedes benz', 'mini', 'mitsubishi',
     'nissan', 'pagani', 'peugeot', 'porsche', 'ram', 'renault', 'rolls royce',
     'saab', 'seat', 'skoda', 'smart', 'subaru', 'suzuki', 'tesla', 'toyota',
-    'volkswagen', 'volvo', 'byd', 'jac', 'changan', 'great wall', 'geely',
-    'haval', 'mg', 'brilliance', 'foton', 'lynk & co', 'dongfeng', 'xpeng',
-    'nio', 'ora', 'rivian', 'polestar', 'karma', 'landwind', 'zotye',
-    'wuling', 'baojun', 'gac', 'hummer'
+    'volkswagen', 'volvo', 'byd', 'jac', 'changan', 'great wall'
   ];
 
 
@@ -73,7 +70,6 @@ export class RegistrarsePage implements OnInit {
 
  
 
-  //valido la edad:
   validarEdad18(birthdate: string){
     var edad = 0;
     if(birthdate){
@@ -87,10 +83,6 @@ export class RegistrarsePage implements OnInit {
       return false;
     }
   }
-
-
-
-
   validarRut():ValidatorFn{
     return () => {
       const rut = this.user.controls.rut.value;
@@ -127,7 +119,6 @@ export class RegistrarsePage implements OnInit {
     return null;
   }
 
-  
   
 }
 

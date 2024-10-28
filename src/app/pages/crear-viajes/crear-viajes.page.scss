@@ -1,5 +1,14 @@
 #map_html{
-    height: 50vh;
+    height: 30vh;
     width: 100%;
     //margin: 10% 10% 10% 10%;
 }
+
+    ion-card{
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        text-align: center;
+        
+    }

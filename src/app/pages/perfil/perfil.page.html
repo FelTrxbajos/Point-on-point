@@ -1,9 +1,12 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Detalles del usuario</ion-card-title>
+      <ion-card-title>Perfil de usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <div >
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" class="imagen_perfil"/>
+      </div>
       <ion-item>
         <ion-label>Nombre completo: {{usuario.name | titlecase }}</ion-label>
       </ion-item>
@@ -13,6 +16,17 @@
       <ion-item>
         <ion-label>Correo Electrónico: {{usuario.email}}</ion-label>
       </ion-item>
+
+      <div *ngIf="usuario.tiene_auto == 'si'">
+        <ion-item>
+          <ion-label>Posee auto: {{usuario.tiene_auto}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Marca de auto: {{usuario.marca_auto}}</ion-label>
+       </ion-item>
+    </div>
+
+
     </ion-card-content>
   </ion-card>
 </ion-content>

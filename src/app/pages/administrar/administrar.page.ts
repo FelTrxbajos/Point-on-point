@@ -21,7 +21,7 @@ export class AdministrarPage  implements OnInit {
     tiene_auto: new FormControl('no', [Validators.required]),
     patente: new FormControl('', [Validators.pattern(/^[A-Z]{2}[0-9]{4}$|^[A-Z]{4}[0-9]{2}$/)]),
     asientos_disp: new FormControl('', [Validators.min(1)]),
-    tipouser: new FormControl('usuario', [Validators.required]),
+    tipo_usuario: new FormControl('usuario', [Validators.required]),
   });
 
   usuarios: any[] = [];

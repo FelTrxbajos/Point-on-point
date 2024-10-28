@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {v4 as uuidv4} from 'uuid';
 
-//lo primero es agregar un import:
+
 import * as L from 'leaflet';
 import * as G from 'leaflet-control-geocoder';
 import 'leaflet-routing-machine';
@@ -16,12 +16,12 @@ import { ViajeService } from 'src/app/services/viaje.service';
 export class ReservasPage implements OnInit {
 
   
-  //vamos a crear variable(s) para controlar el mapa:
+
   private map: L.Map | undefined;
   private geocoder: G.Geocoder | undefined;
   usuario: any;
   
-  //variable de grupo:
+
   viaje = new FormGroup({
     id: new FormControl('',[Validators.required]),
     conductor: new FormControl('',[Validators.required]),
@@ -47,11 +47,9 @@ export class ReservasPage implements OnInit {
 
   initMap(){
     try {
-      //ACA CARGAMOS E INICIALIZAMOS EL MAPA:
+
       this.map = L.map("map_html").locate({setView:true, maxZoom:16});
-      //this.map = L.map("map_html").setView([-33.608552227594245, -70.58039819211703],16);
-      
-      //ES LA PLANTILLA PARA QUE SEA VEA EL MAPA:
+
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -62,15 +60,15 @@ export class ReservasPage implements OnInit {
         console.log(e.latlng.lng);
       });
   
-      //VAMOS A AGREGAR UN BUSCADOR DE DIRECCIONES EN EL MAPA:
+
       this.geocoder = G.geocoder({
         placeholder: "Ingrese dirección a buscar",
         errorMessage: "Dirección no encontrada"
       }).addTo(this.map);
   
-      //VAMOS A REALIZAR UNA ACCIÓN CON EL BUSCADOR, CUANDO OCURRA ALGO CON EL BUSCADOR:
+ 
       this.geocoder.on('markgeocode', (e)=>{
-        //cargo el formulario:
+
         let lat = e.geocode.properties['lat'];
         let lon = e.geocode.properties['lon'];
         this.viaje.controls.nombre_destino.setValue(e.geocode.properties['display_name']);
@@ -93,8 +91,6 @@ export class ReservasPage implements OnInit {
     } catch (error) {
     }
   }
-
-  //creamos un viaje:
   async crearViaje(){
     if(await this.viajeService.createViaje(this.viaje.value)){
       alert("VIAJE CREADO!");
@@ -102,7 +98,6 @@ export class ReservasPage implements OnInit {
       await this.rescatarViajes();
     }
   }
-
   async rescatarViajes(){
     this.viajes = await this.viajeService.getViajes();
   }
