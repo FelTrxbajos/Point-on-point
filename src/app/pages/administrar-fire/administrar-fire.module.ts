@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PerfilPageRoutingModule } from './perfil-routing.module';
+import { AdministrarFirePageRoutingModule } from './administrar-fire-routing.module';
 
-import { PerfilPage } from './perfil.page';
-import { QRCodeModule } from 'angularx-qrcode';
+import { AdministrarFirePage } from './administrar-fire.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PerfilPageRoutingModule,
-    QRCodeModule
+    AdministrarFirePageRoutingModule
   ],
-  declarations: [PerfilPage]
+  declarations: [AdministrarFirePage]
 })
-export class PerfilPageModule {}
+export class AdministrarFirePageModule {}
