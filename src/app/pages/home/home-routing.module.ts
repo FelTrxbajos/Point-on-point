@@ -32,7 +32,11 @@ const routes: Routes = [
         path: 'detalle-viaje',
         loadChildren: () => import('../detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule)
       },
-
+      {
+        path: 'administrar-fire',
+        loadChildren: () => import('../administrar-fire/administrar-fire.module').then( m => m.AdministrarFirePageModule)
+      },
+      
 
     ]
   }

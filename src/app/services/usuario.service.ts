@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { FireService } from './fire.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Storage } from '@ionic/storage-angular';
 export class UsuarioService {
   private usuarioAutenticado: any = null;
 
-  constructor(private storage :Storage) {
+  constructor(private storage :Storage, private fire: FireService) {
     this.init();
   }
 
@@ -27,9 +28,11 @@ export class UsuarioService {
         "asientos_disp": "2",
         "patente": "XXPP32",
     };
-    await this.createUsuario(usuario);
+    await this.fire.crearUsuario(usuario);
+    
   }
 
+  user: any[] = []
 
   //DAO
   public async createUsuario(usuario:any): Promise<boolean>{
@@ -38,7 +41,8 @@ export class UsuarioService {
       return false;
     }
     usuarios.push(usuario);
-    await this.storage.set("usuarios",usuarios);
+    this.fire.crearUsuario(usuario)
+    //await this.storage.set("usuarios",usuarios);
     return true;
   }
 
@@ -75,8 +79,11 @@ export class UsuarioService {
   }
 
   public async login(email: string, password: string): Promise<any> {
-    let usuarios: any[] = await this.storage.get("usuarios") || [];
-    const usu = usuarios.find(elemento=> elemento.email == email && elemento.password == password);
+    this.fire.getUsuarios().subscribe(data => {
+      this.user = data
+    })
+    //let usuarios: any[] = await this.storage.get("usuarios") || [];
+    const usu = this.user.find(elemento=> elemento.email == email && elemento.password == password);
     if(usu){
       localStorage.setItem("usuario", JSON.stringify(usu));
       return true;

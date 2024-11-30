@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
+import { FireService } from 'src/app/services/fire.service';
 
 @Component({
   selector: 'app-registrarse',
@@ -37,7 +38,7 @@ export class RegistrarsePage implements OnInit {
   ];
 
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {
+  constructor(private router: Router, private usuarioService: UsuarioService, private fireService: FireService) {
     this.user.get("rut")?.setValidators([Validators.required,Validators.pattern("[0-9]{7,8}-[0-9kK]{1}"),this.validarRut()]);
    }
 
@@ -55,10 +56,12 @@ export class RegistrarsePage implements OnInit {
       return;
     }
 
-    if(await this.usuarioService.createUsuario(this.user.value)){
-      this.router.navigate(['/login']);
-      this.user.reset();
-      alert("Usuario creado con éxito!")
+      if(await this.fireService.crearUsuario(this.user.value)){
+        alert("USUARIO REGISTRADO!");
+        this.user.reset();
+      }else{
+        alert("ERROR! USUARIO YA EXISTE!");
+      
     }
   }
 

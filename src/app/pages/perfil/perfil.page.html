@@ -1,4 +1,5 @@
 <ion-content>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Perfil de usuario</ion-card-title>
@@ -7,6 +8,7 @@
       <div >
         <img src="https://ionicframework.com/docs/img/demos/avatar.svg" class="imagen_perfil"/>
       </div>
+      
       <ion-item>
         <ion-label>Nombre completo: {{usuario.name | titlecase }}</ion-label>
       </ion-item>
@@ -16,9 +18,7 @@
       <ion-item>
         <ion-label>Correo Electrónico: {{usuario.email}}</ion-label>
       </ion-item>
-
       
-
       <div *ngIf="usuario.tiene_auto == 'si'">
         <ion-item>
           <ion-label>Posee auto: {{usuario.tiene_auto}}</ion-label>
@@ -27,11 +27,7 @@
           <ion-label>Marca de auto: {{usuario.marca_auto}}</ion-label>
        </ion-item>
     </div>
-
-
-    </ion-card-content>
-  </ion-card>
-  <qrcode 
+    <qrcode 
       [qrdata]="'usuario.rut'"
       [allowEmptyString]="true"
       [ariaLabel]="'QR Code image with the following content...'"
@@ -40,16 +36,14 @@
       [colorLight]="'#ffffffff'"
       [elementType]="'canvas'"
       [errorCorrectionLevel]="'M'"
-      [imageSrc]="'./assets/angular-logo.png'"
-      [imageHeight]="75"
-      [imageWidth]="75"
-      [margin]="4"
+      [imageHeight]="55"
+      [imageWidth]="55"
+      [margin]="6"
       [scale]="1"
       [title]="'A custom title attribute'"
-      [width]="300">
-    
-  </qrcode>
-
-
-
+      [width]="150">
+    </qrcode>
+    </ion-card-content>
+  </ion-card>
+  
 </ion-content>
