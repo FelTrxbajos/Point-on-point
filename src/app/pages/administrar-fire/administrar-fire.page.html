@@ -8,7 +8,7 @@
         <ion-input formControlName="rut" type="text" labelPlacement="stacked" label="RUT"></ion-input>
         <ion-input formControlName="name" type="text" labelPlacement="stacked" label="Nombre"></ion-input>
         <ion-input formControlName="birthdate" type="date" labelPlacement="stacked" label="Fecha nacimiento"></ion-input>
-        <ion-select formControlName="genero" label="Género" labelPlacement="stacked">
+        <ion-select formControlName="gender" label="Género" labelPlacement="stacked">
           <ion-select-option>Masculino</ion-select-option>
           <ion-select-option>Femenino</ion-select-option>
           <ion-select-option>Otro</ion-select-option>
@@ -19,8 +19,14 @@
 
         <ion-label>¿Tiene Auto?</ion-label>
         <ion-radio-group formControlName="tiene_auto">
-          <ion-radio value="si">Si</ion-radio>
-          <ion-radio value="no">No</ion-radio>
+          <ion-item>
+            <ion-radio slot="start" value="si"></ion-radio>
+            <ion-label>Sí</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-radio slot="start" value="no"></ion-radio>
+            <ion-label>No</ion-label>
+          </ion-item>
         </ion-radio-group>
         
         
@@ -29,7 +35,7 @@
           <ion-select-option>Alumno</ion-select-option>
         </ion-select>
         
-        <ion-button [disabled]="persona.invalid" type="submit" size="block">REGISTRAR</ion-button>
+        <ion-button [disabled]="persona.invalid" type="submit" size="block" >REGISTRAR</ion-button>
         <ion-button [disabled]="botonModificar || persona.invalid" (click)="modificar()" size="block" color="warning">MODIFICAR</ion-button>
         <ion-button type="reset" size="block" color="secondary">LIMPIAR</ion-button>
       </form>
@@ -50,7 +56,7 @@
       </ion-list>
     </div>
     <ng-template #noHayUsuarios>
-      <img src="https://img.freepik.com/vector-premium/no-hay-ilustracion-concepto-datos_203587-28.jpg" alt="">
+      <H1>No existen usuarios</H1>
     </ng-template>
   </ion-content>
   

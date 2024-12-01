@@ -19,7 +19,7 @@ export class UsuarioService {
         "rut": "16666666-6",
         "birthdate": "1990-03-24",
         "gender": "Masculino",
-        "email": "admin@duocuc.cl",
+        "email": "admin1@duocuc.cl",
         "password": "Admin123.",
         "confirmpassword": "Admin123.",
         "tipo_usuario": "Administrador",
