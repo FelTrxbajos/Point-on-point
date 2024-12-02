@@ -18,9 +18,6 @@ export class PerfilPage implements OnInit {
     this.usuario = JSON.parse(localStorage.getItem('usuario')  || "");
   }
 
-
-  
-
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,

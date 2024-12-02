@@ -39,6 +39,7 @@
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^2.4.0",
     "leaflet-routing-machine": "^3.2.12",
+    "resend": "^4.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uuid": "^10.0.0",

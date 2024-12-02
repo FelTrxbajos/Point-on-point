@@ -1,28 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';  // Importar HttpClient
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-
-  url_mindicador: string = "https://mindicador.cl/api";
-  url_digimon: string = "https://digi-api.com/api/v1/digimon";
+  private apiUrl = 'https://api.tutiempo.net/json/?lan=es&apid=XxE4qqz4zz4hjmw&lid=55735';  // Reemplaza esto con la URL real de la API
+  private apiDinero = 'https://mindicador.cl/api';
 
   constructor(private http: HttpClient) { }
-
-  //métodos:
-  getDatos(){
-    return this.http.get(this.url_mindicador);
+  getTiempo(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
-
-  getDigimons(){
-    return this.http.get(this.url_digimon);
+  getmonea(): Observable<any> {
+    return this.http.get<any>(this.apiDinero);
   }
-  getDigimon(id: number){
-    return this.http.get(this.url_digimon+"/"+id)
-    //return this.http.get(`${this.url_digimon}/${id}`)
-  }
-
-
 }
