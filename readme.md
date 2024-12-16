@@ -1,3 +1,7 @@
+
+![image](https://github.com/user-attachments/assets/6d11c57e-de59-4a29-99fe-6ef8adb1fbe3)
+
+
 # 🚗 Point to Point - ¡Conecta a estudiantes de DuocUC!
 
 Esta aplicación móvil está diseñada para estudiantes de DuocUC, ofreciendo un servicio similar a Uber para facilitar el transporte entre estudiantes dentro de la comunidad. Los usuarios pueden solicitar y ofrecer viajes, creando una plataforma segura y eficiente para compartir vehículos.
