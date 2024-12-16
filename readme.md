@@ -1,5 +1,6 @@
 
-![image](https://github.com/user-attachments/assets/6d11c57e-de59-4a29-99fe-6ef8adb1fbe3)
+![image](https://github.com/user-attachments/assets/df96d81e-0e7e-4c80-a0b7-82c3c834df97)
+
 
 
 # 🚗 Point to Point - ¡Conecta a estudiantes de DuocUC!
@@ -55,6 +56,14 @@ El proyecto requiere las siguientes tecnologías:
 5-📱 Ionic Framework - Desarrollo de aplicaciones móviles.
 
 6- 🔥 Firebase - Plataforma para el desarrollo de aplicaciones y servicios en la nube.
+
+
+----------------------------------------------------------------------------------
+🔌 Dependencias de API
+
+Dólar: https://mindicador.cl/: Muestra El Valor Del Dólar
+
+
 
 
 ----------------------------------------------------------------------------------
