@@ -25,9 +25,11 @@ Sigue estos pasos para instalar y ejecutar el proyecto localmente:
 git clone https://github.com/tu-usuario/tu-repositorio.git
 
 # Ingresa al directorio del proyecto clonado
+
 cd tu-repositorio
 
 # Instala las dependencias del proyecto
+
 npm install
 
 # Ejecuta la Aplicación 
@@ -48,6 +50,9 @@ El proyecto requiere las siguientes tecnologías:
 
 5-📱 Ionic Framework - Desarrollo de aplicaciones móviles.
 
+6- 🔥 Firebase - Plataforma para el desarrollo de aplicaciones y servicios en la nube.
+
+
 ----------------------------------------------------------------------------------
 🚀 Uso
 
@@ -57,4 +62,4 @@ La aplicación funciona de manera similar a Uber. Los estudiantes pueden:
 🚙 Ofrecer un viaje: Registrar su vehículo y disponibilidad para ofrecer viajes a otros estudiantes.
 
 ----------------------------------------------------------------------------------
-Este README ofrece una visión completa del proyecto, desde su propósito y justificación hasta las instrucciones necesarias para su implementación
+Este README ofrece una visión completa del proyecto, desde su propósito y justificación hasta las instrucciones necesarias para su implementación, además de las herramientas  utilizadas  para su creación y modificaciones 
