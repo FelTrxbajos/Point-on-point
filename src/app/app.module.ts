@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 //npm install firebase, npm install @angular/fire, ionic g service services/fire
 
@@ -24,7 +25,8 @@ import { environment } from 'src/environments/environment';
   IonicStorageModule.forRoot(),
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFirestoreModule,
-  AngularFireAuthModule
+  AngularFireAuthModule,
+  HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

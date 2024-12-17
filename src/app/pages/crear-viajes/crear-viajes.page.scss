@@ -1,9 +1,16 @@
-#map_html{
-    height: 30vh;
-    width: 100%;
-    //margin: 10% 10% 10% 10%;
+.map-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
+#map_html {
+    height: 400px; /* Puedes ajustar este valor */
+    width: 100%;
+    color: black;
+  }
+
+  
     ion-card{
         border-radius: 20px;
         display: flex;

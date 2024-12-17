@@ -11,17 +11,17 @@
         </ion-card-header>
         <ion-card-content>
             <ion-item>
-              <ion-input [(ngModel)]="email" id="email" name="email" type="email" fill="solid" label="Correo Electrónico" labelPlacement="floating" placeholder="email@duocuc.cl"></ion-input>
+              <ion-input [(ngModel)]="correo" id="email" name="email" type="email" fill="solid" label="Correo Electrónico" labelPlacement="floating" placeholder="email@duocuc.cl"></ion-input>
             </ion-item>
             <ion-item>
               <br>
-              <ion-input [(ngModel)]="password" id="password" name="password" type="password" fill="solid" label="Contraseña" labelPlacement="floating"></ion-input>
+              <ion-input [(ngModel)]="contrasena" id="password" name="password" type="password" fill="solid" label="Contraseña" labelPlacement="floating"></ion-input>
               <br>
             </ion-item>
             <ion-button (click)="login()" expand="block" shape="round" type="submit">Iniciar Sesión</ion-button>
           
           <p style="text-align:center;"> ¿No tienes cuenta? <a routerLink="/registrarse">Registrarse</a>
-          || <a style="text-align:center;" routerLink="/recuperar"> Olvide mi contraseña </a>
+          || <a style="text-align:center;" routerLink="/olvido"> Olvide mi contraseña </a>
           </p>
           
         </ion-card-content>

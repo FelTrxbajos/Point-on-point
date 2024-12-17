@@ -1,110 +1,128 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { FireService } from './fire.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
   private usuarioAutenticado: any = null;
-
-  constructor(private storage :Storage, private fire: FireService) {
-    this.init();
+  constructor(private storage: Storage, private firestore: AngularFirestore, private afAuth: AngularFireAuth) {
+    this.initStorage();
   }
 
-  async init(){
+  async initStorage() {
     await this.storage.create();
-    let usuario = {
-        "name": "admin",
-        "rut": "16666666-6",
-        "birthdate": "1990-03-24",
-        "gender": "Masculino",
-        "email": "admin1@duocuc.cl",
-        "password": "Admin123.",
-        "confirmpassword": "Admin123.",
-        "tipo_usuario": "Administrador",
-        "tiene_auto": "si",
-        "marca_auto": "BMW",
-        "asientos_disp": "2",
-        "patente": "XXPP32",
-    };
-    await this.fire.crearUsuario(usuario);
-    
+    await this.ensureDefaultUsers();
   }
 
-  user: any[] = []
-
-  //DAO
-  public async createUsuario(usuario:any): Promise<boolean>{
+  // Método para asegurar que siempre exista un usuario 'administrador'
+  private async ensureDefaultUsers() {
+    // Obtener la lista de usuarios
     let usuarios: any[] = await this.storage.get("usuarios") || [];
-    if(usuarios.find(usu=>usu.rut==usuario.rut)!=undefined){
+  
+    // Verificar si el usuario 'administrador' ya existe
+    const adminExists = usuarios.find(usu => usu.tipo_usuario === 'Administrador');
+    // Crear usuario administrador si no existe
+    if (!adminExists) {
+      const admin = {
+        rut: '11111111-1',
+        name: 'Alan',
+        gender: 'Masculino',
+        email: 'admin@duocuc.cl',
+        password: 'Admin123.',
+        birthdate: '19-09-1990',
+        confirmpassword: 'Admin123.',
+        tipo_usuario: 'Administrador',
+        marca_auto: 'SUBARU',
+        asientos_disp: '3',
+        patente: 'FHYA9',
+
+      };
+      usuarios.push(admin);
+      console.log('Usuario administrador creado');
+    } else {
+      console.log('Usuario administrador ya existe');
+    }
+// Guardar la lista de usuarios actualizada en Storage
+  await this.storage.set("usuarios", usuarios);
+  }
+  //DAO
+  public async createUsuario(usuario: any): Promise<boolean> {
+    let usuarios: any[] = await this.storage.get("usuarios") || [];
+    if (usuarios.find(usu => usu.rut == usuario.rut) != undefined) {
       return false;
     }
     usuarios.push(usuario);
-    this.fire.crearUsuario(usuario)
-    //await this.storage.set("usuarios",usuarios);
+    await this.storage.set("usuarios", usuarios);
     return true;
   }
 
-  public async getUsuario(rut:string): Promise<any>{
-    let usuarios: any[] = await this.storage.get("usuarios") || [];
-    return usuarios.find(usu=>usu.rut==rut);
+  public async getUsuario(rut: string): Promise<any | null> {
+    try {
+      const usuariosSnapshot = await this.firestore.collection('Usuarios', ref => ref.where('rut', '==', rut)).get().toPromise();
+      if (!usuariosSnapshot || usuariosSnapshot.empty) {
+        console.error('Usuario no encontrado o error en Firestore.');
+        return null;
+      }
+      const usuarios = usuariosSnapshot.docs.map(doc => doc.data() as any);
+      return usuarios.length > 0 ? usuarios[0] : null;
+    } catch (error) {
+      console.error('Error al obtener usuario:', error);
+      return null;
+    }
   }
-
   public async getUsuarios(): Promise<any[]>{
     let usuarios: any[] = await this.storage.get("usuarios") || [];
     return usuarios;
   }
 
-  public async updateUsuario(rut: string, nuevoUsuario: any) {
-    let usuarios: any[] = await this.storage.get("usuarios") || [];
-    let indice: number = usuarios.findIndex(usu=>usu.rut==rut);
-    if(indice == -1){
+  public async updateUsuario(rut: string, nuevoUsuario: any): Promise<boolean> {
+    try {
+      // Buscar documentos donde el campo 'rut' coincida
+      const usuariosSnapshot = await this.firestore.collection('Usuarios', ref => ref.where('rut', '==', rut)).get().toPromise();
+      if (!usuariosSnapshot || usuariosSnapshot.empty) {
+        console.error(`No se encontró ningún usuario con el rut: ${rut}`);
+        return false;
+      }
+      const docId = usuariosSnapshot.docs[0].id;
+
+      await this.firestore.collection('Usuarios').doc(docId).update(nuevoUsuario);
+  
+      console.log(`Usuario con rut ${rut} actualizado correctamente.`);
+      return true;
+    } catch (error) {
+      console.error('Error al actualizar usuario en Firestore:', error);
       return false;
     }
-    usuarios[indice] = nuevoUsuario;
-    await this.storage.set("usuarios",usuarios);
-    return true;
   }
 
   public async deleteUsuario(rut: string): Promise<boolean> {
-    let usuarios: any[] = await this.storage.get("usuarios") || [];
-    let indice: number = usuarios.findIndex(usu=>usu.rut==rut);
-    if(indice == -1){
+    try {
+      const usuariosSnapshot = await this.firestore.collection('Usuarios', ref => ref.where('rut', '==', rut)).get().toPromise();
+      if (!usuariosSnapshot || usuariosSnapshot.empty) {
+        return false;
+      }
+      const docId = usuariosSnapshot.docs[0].id;
+      await this.firestore.collection('Usuarios').doc(docId).delete();
+      return true;
+    } catch (error) {
+      console.error('Error al eliminar usuario:', error);
       return false;
     }
-    usuarios.splice(indice,1);
-    await this.storage.set("usuarios",usuarios);
-    return true;
   }
 
-  public async login(email: string, password: string): Promise<any> {
-    this.fire.getUsuarios().subscribe(data => {
-      this.user = data
-    })
-    //let usuarios: any[] = await this.storage.get("usuarios") || [];
-    const usu = this.user.find(elemento=> elemento.email == email && elemento.password == password);
-    if(usu){
-      localStorage.setItem("usuario", JSON.stringify(usu));
+  
+
+  public async authUsuario(rut: string, contrasena: string): Promise<any> {
+    let usuarios: any[] = await this.storage.get("usuarios") || [];
+    const usuarioAuth = usuarios.find(usu => usu.rut == rut && usu.contrasena == contrasena);
+    if (usuarioAuth) {
+      localStorage.setItem("usuario", JSON.stringify(usuarioAuth));
       return true;
     }
     return false;
-  }
-
-  public async authenticate(email: string, password: string): Promise<boolean> {
-    try {
-      const usuarios: any[] = await this.getUsuarios();
-      const usuario = usuarios.find(user => user.email === email && user.password === password);
-      if (usuario) {
-        this.usuarioAutenticado = usuario;
-        localStorage.setItem('user', JSON.stringify(usuario));
-        return true; 
-      }
-      return false; 
-    } catch (error) {
-      console.error('Error al autenticar:', error);
-      return false;
-    }
   }
 
   public async recuperarUsuario(email: string): Promise<any> {
@@ -112,11 +130,24 @@ export class UsuarioService {
     return usuarios.find(elemento=> elemento.email == email);
   }
 
-  public async getUsuarioAutenticado(): Promise<any> {
+  public async recoverUsuario(correo: string): Promise<any> {
+    let usuarios: any[] = await this.storage.get("usuarios") || [];
+    return usuarios.find(usu => usu.correo == correo);
+  }
+
+  public async getUsuarioAutenticado(): Promise<any | null> {
     if (!this.usuarioAutenticado) {
-      const userData = localStorage.getItem('user');
-      if (userData) {
-        this.usuarioAutenticado = JSON.parse(userData);
+      const user = await this.afAuth.currentUser;
+      console.log("usuario", user);
+      if (user) {
+        console.log("usuario", user);
+        const usuarioId = user.uid;
+        const usuarioRef = this.firestore.collection('Usuarios').doc(usuarioId);
+        const usuarioDoc = await usuarioRef.get().toPromise();
+        if (usuarioDoc && usuarioDoc.exists && usuarioDoc.data()) {
+          this.usuarioAutenticado = usuarioDoc.data();
+          console.log("usuario autenticado", this.usuarioAutenticado);
+        }
       }
     }
     return this.usuarioAutenticado;

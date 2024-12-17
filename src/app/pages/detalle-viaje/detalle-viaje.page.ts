@@ -1,61 +1,56 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ViajeService } from 'src/app/services/viaje.service';
-import * as L from 'leaflet';
-import 'leaflet-routing-machine';
-import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-detalle-viaje',
   templateUrl: './detalle-viaje.page.html',
   styleUrls: ['./detalle-viaje.page.scss'],
 })
 export class DetalleViajePage implements OnInit {
+  viajes: any[] = [];
+  usuario: any;
+  viajeConUsuario: any;
 
-  id: string = "";
-  viaje: any = {};
-  private map: L.Map | undefined;
-
-  constructor(private activatedRoute: ActivatedRoute, private viajeService: ViajeService, private navController: NavController) { }
+  constructor(private viajeService: ViajeService) {}
 
   async ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id") || "";
-    this.viaje = await this.viajeService.getViaje(this.id);
-    this.initMap();
+    await this.Datos();
+    await this.activarRecurrente();
+    this.viajeConUsuario = this.buscarCoincidencia()
+    console.log(this.viajeConUsuario)
   }
 
-  initMap(){
-    try {
-      setTimeout(() => {
-        this.map = L.map("map_detalle").setView([this.viaje.latitud, this.viaje.longitud],16);
-          
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(this.map);
-        
-        L.Routing.control({
-          waypoints: [L.latLng(-33.608552227594245, -70.58039819211703),
-          L.latLng(this.viaje.latitud,this.viaje.longitud)],
-          fitSelectedRoutes: true,
-          show: false,
-        }).addTo(this.map);
-      }, 2000);
-    } catch (error) {}
+  async Datos() {
+    this.viajes = await this.viajeService.getViajes();
+    this.usuario = JSON.parse(localStorage.getItem("user") || '');
+  }
+  
+  async activarRecurrente() {
+    this.viajes = await this.viajeService.getViajes(); 
+    console.log(this.viajes.indexOf(this.usuario.rut))
+    this.viajes = this.viajes.filter(viaje => viaje.conductor != this.usuario.nombre);
+
+}
+
+ 
+
+  async cancelarReserva(viajeId: string) {
+    const cancelado = await this.viajeService.cancelarReserva(viajeId, this.usuario.rut);
+    if (cancelado) {
+      alert('Reserva cancelada con éxito.');
+      window.location.reload();
+    } else {
+      alert('No se pudo cancelar la reserva. Inténtalo de nuevo.');
+    }
   }
 
-  async tomar_viaje(){
-    var usuario = JSON.parse(localStorage.getItem('usuario') || '');
-    var pasajero = {
-      "rut": usuario.rut,
-      "nombre": usuario.name,
-      "correo": usuario.email
-    }
-    if(await this.viajeService.modificar_viaje(this.id, pasajero)){
-      alert("Viaje tomado con éxito!");
-      this.navController.navigateRoot("/home/reservas");
-    }else{
-      alert("ERROR! ya eres pasajero!");
+buscarCoincidencia() {
+  for (let viaje of this.viajes) {
+    if (viaje.pasajeros.indexOf(this.usuario.rut) !== -1) {
+      return viaje;
     }
   }
+  return null;
+}
 
 }

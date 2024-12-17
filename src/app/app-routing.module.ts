@@ -58,11 +58,17 @@ const routes: Routes = [
     path: 'crear-viajes',
     loadChildren: () => import('./pages/crear-viajes/crear-viajes.module').then( m => m.CrearViajesPageModule)
   },
+  {
+    path: 'olvido',
+    loadChildren: () => import('./pages/olvido/olvido.module').then( m => m.OlvidoPageModule)
+  },
 
   {
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+ 
+
 
 
 

@@ -26,4 +26,12 @@ export class PerfilPage implements OnInit {
     });
     await alert.present();
   }
+
+  dataQR(): string {
+    const name = this.usuario.get('name')?.value ?? '';
+    const rut = this.usuario.get('rut')?.value ?? '';
+    const email = this.usuario.get('email')?.value ?? '';
+
+    return `${name}, ${rut}, ${email}`;
+  }
 }

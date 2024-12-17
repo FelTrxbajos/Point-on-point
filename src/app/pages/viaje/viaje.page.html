@@ -1,3 +1,37 @@
-<ion-content>
+<ion-header>
+    <ion-toolbar color="light">
+      <ion-menu-button color="dark" slot="start"></ion-menu-button>
+      <ion-title>Todos los viajes disponibles</ion-title>
+    </ion-toolbar>
+  </ion-header>
   
-</ion-content>
+  <ion-content>
+  
+    <ion-list>
+        <div *ngFor="let viaje of viajes">
+          <div *ngIf="viaje.estado_viaje == 'pendiente'">
+            <ion-item>
+              <ion-label>
+                <p>Conductor: {{ viaje.conductor }}</p>
+                <p>Destino: {{ viaje.nombre_destino }}</p>
+                <p>Asientos disponibles: {{viaje.asientos_disp}}</p>
+                <p>Hora salida: {{viaje.hora_salida}}</p>
+                <p>Valor: ${{ viaje.valor }}</p>
+                <div *ngIf="monea">
+                  <p>El valor en Dolares: <strong> ${{ (viaje.valor / monea.dolar.valor).toFixed(2) }}</strong></p>
+                </div>
+              </ion-label>
+  
+  
+              <ion-button slot="end" (click)="tomarReserva(viaje.id)" color="warning" >Reservar</ion-button>
+            </ion-item>
+          </div>
+        </div>
+  
+    </ion-list>
+  </ion-content>
+  
+  
+  
+  
+  

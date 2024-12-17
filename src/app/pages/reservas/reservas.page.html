@@ -1,26 +1,29 @@
-<ion-content>
-    <div value="viajes">
-        <ion-item slot="header">
-          <ion-label>Viajes disponibles</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <ion-list *ngFor="let v of viajes">
-            <ion-item>
-              <ion-label>
-                <h3>{{v.nombre_destino}}</h3><br />
-                <ion-note color="medium" class="ion-text-wrap">
-                  Asientos disponibles: {{v.asientos_disp}}
-                </ion-note>
-              </ion-label>
-              <div class="metadata-end-wrapper" slot="end">
-                <ion-note color="medium">{{v.valor | currency}}</ion-note>
-              </div>
-              <ion-note slot="end" >
-                <ion-button color="warning" routerLink="/home/reservas/detalle-viaje/{{v.id}}" >Ver viaje</ion-button>
-              </ion-note>
-              <ng-template></ng-template>
-            </ion-item>
-          </ion-list>
-        </div>
-      </div> 
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-menu-button color="dark" slot="start"></ion-menu-button>
+    <ion-title>Viaje reservado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-card *ngFor="let viaje of viajes">
+    <ion-card-header>
+      <ion-card-title>Detalles del Viaje</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Conductor:</strong> {{ viaje.name }}</p>
+      <p><strong>Destino:</strong> {{ viaje.nombre_destino }}</p>
+      <p><strong>Hora salida:</strong> {{ viaje.hora_salida }}</p>
+      <p><strong>Valor:</strong> ${{ viaje.valor }}</p>
+        <p><strong>Pasajeros:</strong> {{ viaje.pasajeros?.join(', ') }}</p>
+      <p><strong>Estado del Viaje:</strong> Pendiente</p>
+    </ion-card-content>
+    <ion-button (click)="cancelarReserva(viaje.id)" expand="block" fill="clear" shape="round">
+      Cancelar Reserva
+    </ion-button>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="viajes.length === 0">
+  <p style="text-align: center;">No tienes reservas realizadas.</p>
 </ion-content>

@@ -9,7 +9,7 @@ describe('Página Home', () => {
   let fixture: ComponentFixture<HomePage>;
   let usuarioPrueba = {
     "rut": "11111111-1",
-    "name": "administrador",
+    "name": "sebastian",
     "birthdate": "1980-01-01",
     "gender": "Masculino",
     "email": "admin@duocuc.cl",
@@ -17,7 +17,7 @@ describe('Página Home', () => {
     "confirmpassword": "Admin123.",
     "tiene_auto": "no",
     "marca_auto": "SUBARU",
-    "tipo_usuario": "Administrador"
+    "tipo_usuario": "usuario"
   };
 
   //aqui dentro del beforeEach deben preparar todo lo necesario de la página a testear:
@@ -51,7 +51,7 @@ describe('Página Home', () => {
   });
 
   it('2. Verificar el nombre del usuario', ()=>{
-    expect(component.usuario.nombre).toEqual("administrador");
+    expect(component.usuario.name).toEqual("sebastian");
   });
 
   it('3. Validar el usuario completo', ()=>{

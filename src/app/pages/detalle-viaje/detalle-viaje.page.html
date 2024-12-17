@@ -1,26 +1,29 @@
-<ion-content>
-    <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-          </ion-buttons>
-          <ion-title>Detalle viaje</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      
-      <ion-content>
-        <ion-card>
-          <div id="map_detalle"></div>
-          <ion-card-header>
-            <ion-card-title>Mapa del destino</ion-card-title>
-            <ion-card-subtitle>{{viaje.nombre_destino}}</ion-card-subtitle>
-            <ion-card-subtitle>Valor: {{viaje.valor | currency}}</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            
-          </ion-card-content>
-          <ion-button color="success" size="block" (click)="tomar_viaje()" *ngIf="viaje.asientos_disp !==0">Tomar viaje</ion-button>
-        </ion-card>
-      </ion-content>
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-menu-button color="dark" slot="start"></ion-menu-button>
+    <ion-title>Reservas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="viajeConUsuario">
+  <ion-card *ngFor="let viaje of viajes">
+    <ion-card-header>
+      <ion-card-title>Detalles del Viaje</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Conductor:</strong> {{ viaje.conductor }}</p>
+      <p><strong>Destino:</strong> {{ viaje.nombre_destino }}</p>
+      <p><strong>Hora salida:</strong> {{ viaje.hora_salida }}</p>
+      <p><strong>Valor:</strong> ${{ viaje.valor }}</p>
+        <p><strong>Pasajeros:</strong> {{ viaje.pasajeros?.join(', ') }}</p>
+      <p><strong>Estado del Viaje:</strong> Pendiente</p>
+    </ion-card-content>
+    <ion-button (click)="cancelarReserva(viaje.id)" expand="block" fill="clear" shape="round">
+      Cancelar Reserva
+    </ion-button>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="viajes.length === 0">
+  <p style="text-align: center;">No tienes reservas realizadas.</p>
 </ion-content>

@@ -13,8 +13,7 @@ import { ReservasPage } from './reservas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReservasPageRoutingModule,
-    ReactiveFormsModule
+    ReservasPageRoutingModule
   ],
   declarations: [ReservasPage]
 })

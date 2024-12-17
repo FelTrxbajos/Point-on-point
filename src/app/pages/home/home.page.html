@@ -19,11 +19,36 @@
       <h5>Te estábamos esperando, ¿A dónde vamos?</h5>
   </div>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Clima de Hoy</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Verificamos si hay datos de tiempo disponibles -->
+      <div *ngIf="tiempo && tiempo.day1">
+        <p><strong>Fecha:</strong> {{ tiempo.day1.date }}</p>
+        <p><strong>Temperatura Máxima:</strong> {{ tiempo.day1.temperature_max }} ºC</p>
+        <p><strong>Temperatura Mínima:</strong> {{ tiempo.day1.temperature_min }} ºC</p>
+        <p><strong>Condición:</strong> {{ tiempo.day1.text }}</p>
+        <p><strong>Humedad:</strong> {{ tiempo.day1.humidity }} %</p>
+        <p><strong>Viento:</strong> {{ tiempo.day1.wind }} km/h</p>
+      </div>
+
+      <!-- Si no hay datos, mostramos un mensaje de carga -->
+      <div *ngIf="!tiempo || !tiempo.day1">
+        <p>Cargando los datos del clima...</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       
-      <ion-tab-button tab="reservas">
+      <ion-tab-button tab="viaje">
         <ion-icon name="file-tray-full-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="reservas">
+        <ion-icon name="calendar-number-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="crear-viajes" *ngIf="usuario.tiene_auto=='si'" >
         <ion-icon name="cloud-upload-outline"></ion-icon>

@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recuperar contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Ingrese correo registrado</ion-label>
+        <ion-input #emailInput color="primary" type="email" placeholder="ejemplo@duocuc.cl"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button color="warning" expand="full" fill="outline" shape="round"
+                  (click)="recuperarContrasena(emailInput.value ? emailInput.value.toString() : '')">
+        Enviar correo de recuperación
+      </ion-button>
+      
+      <!-- Mostrar mensaje de éxito o error -->
+      <ion-text *ngIf="mensaje" [color]="mensajeColor">
+        {{ mensaje }}
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
