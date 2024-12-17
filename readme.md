@@ -1,3 +1,8 @@
+
+![image](https://github.com/user-attachments/assets/df96d81e-0e7e-4c80-a0b7-82c3c834df97)
+
+
+
 # 🚗 Point to Point - ¡Conecta a estudiantes de DuocUC!
 
 Esta aplicación móvil está diseñada para estudiantes de DuocUC, ofreciendo un servicio similar a Uber para facilitar el transporte entre estudiantes dentro de la comunidad. Los usuarios pueden solicitar y ofrecer viajes, creando una plataforma segura y eficiente para compartir vehículos.
@@ -25,9 +30,11 @@ Sigue estos pasos para instalar y ejecutar el proyecto localmente:
 git clone https://github.com/tu-usuario/tu-repositorio.git
 
 # Ingresa al directorio del proyecto clonado
+
 cd tu-repositorio
 
 # Instala las dependencias del proyecto
+
 npm install
 
 # Ejecuta la Aplicación 
@@ -48,6 +55,17 @@ El proyecto requiere las siguientes tecnologías:
 
 5-📱 Ionic Framework - Desarrollo de aplicaciones móviles.
 
+6- 🔥 Firebase - Plataforma para el desarrollo de aplicaciones y servicios en la nube.
+
+
+----------------------------------------------------------------------------------
+🔌 Dependencias de API
+
+Dólar: https://mindicador.cl/: Muestra El Valor Del Dólar
+
+
+
+
 ----------------------------------------------------------------------------------
 🚀 Uso
 
@@ -57,4 +75,4 @@ La aplicación funciona de manera similar a Uber. Los estudiantes pueden:
 🚙 Ofrecer un viaje: Registrar su vehículo y disponibilidad para ofrecer viajes a otros estudiantes.
 
 ----------------------------------------------------------------------------------
-Este README ofrece una visión completa del proyecto, desde su propósito y justificación hasta las instrucciones necesarias para su implementación
+Este README ofrece una visión completa del proyecto, desde su propósito y justificación hasta las instrucciones necesarias para su implementación, además de las herramientas  utilizadas  para su creación y modificaciones 
